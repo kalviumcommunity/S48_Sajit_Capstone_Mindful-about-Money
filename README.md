@@ -23,7 +23,7 @@ Mindful About Money is a personal finance app designed to help users develop a m
 1. Clone the repository:
 
 ```
-git clone https://github.com/your-username/mindful-about-money.git
+git clone https://github.com/kalviumcommunity/mindful-about-money.git
 ```
 
 2. Install dependencies:
