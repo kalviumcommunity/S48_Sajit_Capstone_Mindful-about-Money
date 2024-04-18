@@ -7,6 +7,8 @@ app.get("/ping", (req, res) => {
   res.json({ message: "pong" });
 });
 
+app.use("/", routes);
+
 if (require.main === module) {
   app.listen(port, () => {
     console.log(`🚀 Server running on PORT: ${port}`);
