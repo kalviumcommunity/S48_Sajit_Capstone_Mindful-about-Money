@@ -1,5 +1,7 @@
 # Mindful About Money
 
+![Idea](../Assets/readme-img.jpeg)
+
 Mindful About Money is a personal finance app designed to help users develop a mindful and conscious approach towards managing their money. The app provides features for budgeting, expense tracking, accessing educational resources, and subscribing to a newsletter with financial tips and market updates.
 
 ## Features
