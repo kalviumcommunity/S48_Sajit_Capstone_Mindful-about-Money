@@ -29,17 +29,16 @@ git clone https://github.com/kalviumcommunity/mindful-about-money.git
 2. Install dependencies:
 
 ```
-cd mindful-about-money
-npm install
+cd Client && npm install && cd ../Server && npm install
 ```
 
 3. Start the development server:
 
 ```
-npm start
+cd Client && npm run dev
 ```
 
-4. Open [http://localhost:3000](http://localhost:3000) to view the app in your browser.
+4. Open [http://localhost:5173](http://localhost:5173) to view the app in your browser.
 
 ## Contributing
 
@@ -58,7 +57,8 @@ This project is licensed under the [MIT License](LICENSE).
 ## Acknowledgments
 
 - [React](https://reactjs.org/)
-- [Bootstrap](https://getbootstrap.com/)
+- [Typescript](https://www.typescriptlang.org/)
+- [Clerk](https://clerk.com/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Node.js](https://nodejs.org/)
 - [MongoDB](https://www.mongodb.com/)
