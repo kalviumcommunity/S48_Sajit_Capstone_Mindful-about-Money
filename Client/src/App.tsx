@@ -9,8 +9,8 @@ function App() {
     <Router>
       <div className="app-container">
         <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/auth" element={<Auth />} />
+          <Route path="/" element={<Dashboard />} /> {/* This is the default route */}
+          <Route path="/auth" element={<Auth />} /> {/* This is the route for the authentication page */}
         </Routes>
       </div>
     </Router>
