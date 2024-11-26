@@ -16,7 +16,8 @@ Mindful About Money is a personal finance app designed to help users develop a m
 - **Front-end**: React, Bootstrap, Tailwind CSS
 - **Back-end**: Node.js, Express
 - **Database**: MongoDB
-- **Additional Libraries**: React Icons, Chart.js (for visualizations)
+- **Authentication**: Clerk (with support for Google and GitHub login)
+<!-- - **Additional Libraries**: React Icons, Chart.js (for visualizations) -->
 
 ## Getting Started
 
@@ -63,5 +64,5 @@ This project is licensed under the [MIT License](LICENSE).
 - [Node.js](https://nodejs.org/)
 - [MongoDB](https://www.mongodb.com/)
 - [Express](https://expressjs.com/)
-- [React Icons](https://react-icons.github.io/react-icons/)
-- [Chart.js](https://www.chartjs.org/)
+<!-- - [React Icons](https://react-icons.github.io/react-icons/)
+- [Chart.js](https://www.chartjs.org/) -->
