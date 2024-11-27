@@ -19,5 +19,3 @@ mongoose.connect(mongoURI)
 	.catch((error) => {
 		console.error('Error connecting to MongoDB:', error, '❌')
 	})
-
-app.use
