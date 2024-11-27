@@ -3,21 +3,21 @@ import { useUser } from "@clerk/clerk-react";
 
 // FinancialRecordForm component
 export const FinancialRecordForm = () => {
-  // state variables for form fields
+  // State variables for form fields
   const [description, setDescription] = useState<string>("");
   const [amount, setAmount] = useState<string>("");
   const [date, setDate] = useState<string>("");
   const [category, setCategory] = useState<string>("");
   const [paymentMethod, setPaymentMethod] = useState<string>("");
 
-  // get user object from Clerk
+  // Get user object from Clerk
   const { user } = useUser();
 
-  // handle form submission
+  // Handle form submission
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // create new record object
+    // Create new record object
     const newRecord = {
       userId: user?.id,
       date: new Date(date).toISOString(), // convert date to ISO string
@@ -27,9 +27,9 @@ export const FinancialRecordForm = () => {
       paymentMethod: paymentMethod,
     };
 
-    // addRecord(newRecord)
+    // AddRecord(newRecord)
 
-    // clear form
+    // Clear form
     setDate("");
     setDescription("");
     setAmount("");
