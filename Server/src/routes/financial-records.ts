@@ -70,6 +70,7 @@ router.delete('/:id', async (req: Request, res: Response, next: NextFunction) =>
             return
         }
         res.status(200).json(deletedRecord) // Return the deleted record
+    // Catch any errors and return a 500 status code
     } catch (error) {
         console.error('Error deleting record:', error)
         res.status(500).json({ message: 'Internal server error.' })
