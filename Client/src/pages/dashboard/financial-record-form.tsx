@@ -5,7 +5,7 @@ import { useFinancialRecords } from "../../contexts/financial-record-context";
 // FinancialRecordForm component
 export const FinancialRecordForm = () => {
   // State variables for form fields
-  const [description, setDescription] = useState<string>("");
+  const [description, setDescription] = useState<string>(""); 
   const [amount, setAmount] = useState<string>("");
   const [date, setDate] = useState<string>("");
   const [category, setCategory] = useState<string>("");
@@ -42,9 +42,9 @@ export const FinancialRecordForm = () => {
 
   return (
     <div className="form-container">
+      {/* Add onSubmit event handler */}
       <form onSubmit={handleSubmit}>
         {" "}
-        {/* Add onSubmit event handler */}
         <div className="form-field">
           <label>Description:</label>
           <input
