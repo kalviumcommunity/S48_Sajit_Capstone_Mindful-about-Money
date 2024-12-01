@@ -7,7 +7,7 @@ export const Dashboard = () => {
 	const { user } = useUser()
 	return (
 		<div className="dashboard-container">
-			<h1>Welcome to Mindful About Money, {user?.firstName}! Here are your finances</h1>
+			<h1>Welcome to Mindful About Money, {user?.firstName}! Here are your finances.</h1>
 			<FinancialRecordForm />
 			<FinancialRecordList />
 		</div>

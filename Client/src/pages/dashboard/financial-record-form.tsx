@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useUser } from "@clerk/clerk-react";
+import { useFinancialRecords } from "../../contexts/financial-record-context";
 
 // FinancialRecordForm component
 export const FinancialRecordForm = () => {
@@ -9,6 +10,7 @@ export const FinancialRecordForm = () => {
   const [date, setDate] = useState<string>("");
   const [category, setCategory] = useState<string>("");
   const [paymentMethod, setPaymentMethod] = useState<string>("");
+  const {addRecord} = useFinancialRecords();
 
   // Get user object from Clerk
   const { user } = useUser();
@@ -16,18 +18,19 @@ export const FinancialRecordForm = () => {
   // Handle form submission
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
+    
     // Create new record object
     const newRecord = {
-      userId: user?.id,
+      userId: user?.id ?? "", // Get user ID from Clerk user object
       date: new Date(date).toISOString(), // convert date to ISO string
-      description: description,
+      description: description, 
       amount: parseFloat(amount), // convert amount to float
       category: category,
       paymentMethod: paymentMethod,
     };
-
-    // AddRecord(newRecord)
+    
+    // Add record to database
+    addRecord(newRecord)
 
     // Clear form
     setDate("");
@@ -105,6 +108,7 @@ export const FinancialRecordForm = () => {
             <option value="">Select a Payment Method</option>
             <option value="Credit Card">Credit Card</option>
             <option value="Debit Card">Debit Card</option>
+            <option value="UPI">UPI</option>
             <option value="Cash">Cash</option>
             <option value="Cheque">Cheque</option>
             <option value="Bank Transfer">Bank Transfer</option>
