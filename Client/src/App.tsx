@@ -2,6 +2,7 @@ import './App.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { Dashboard } from './pages/dashboard'
 import { Auth } from './pages/auth'
+import { FinancialRecordsProvider } from './contexts/financial-record-context'
 
 function App() {
 
@@ -9,8 +10,17 @@ function App() {
     <Router>
       <div className="app-container">
         <Routes>
-          <Route path="/" element={<Dashboard />} /> {/* This is the default route */}
-          <Route path="/auth" element={<Auth />} /> {/* This is the route for the authentication page */}
+          {/* This is the default route */}
+          <Route
+          path="/"
+          element={
+            <FinancialRecordsProvider>
+            <Dashboard />
+            </FinancialRecordsProvider>
+          }
+          />
+          {/* This is the route for the authentication page */}
+          <Route path="/auth" element={<Auth />} />
         </Routes>
       </div>
     </Router>
