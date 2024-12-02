@@ -33,13 +33,15 @@ git clone https://github.com/kalviumcommunity/mindful-about-money.git
 2. Install dependencies:
 
 ```
-cd Client && npm install && cd ../Server && npm install
+cd Client && npm install
+cd ../Server && npm install
 ```
 
 3. Start the development server:
 
 ```
 cd Client && npm run dev
+cd Server && npm run dev
 ```
 
 4. Open [http://localhost:5173](http://localhost:5173) to view the app in your browser.
