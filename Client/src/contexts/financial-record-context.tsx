@@ -1,5 +1,6 @@
 import { createContext, useContext } from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useUser } from '@clerk/clerk-react';
 
 interface FinancialRecord {
 	id: string,
@@ -28,7 +29,32 @@ export const FinancialRecordsProvider = ({
 }) => {
 
 	const [records, setRecords] = useState<FinancialRecord[]>([]);
+
+	const{ user } = useUser();
+
+	const fetchRecords = async () => {
+		// If user is not logged in, return
+		if (!user) return;
+
+		// Fetch records by user ID
+		const response = await fetch(`http://localhost:3001/financial-records/getAllByUserID/${user.id}`);
+
+		// If response is OK, set records
+		if (response.ok) {
+			const records = await response.json();
+			console.log('Fetched user records:', records);
+			setRecords(records);
+		}
+	}
+
+	// Fetch records when user changes
+	useEffect(() => {
+		fetchRecords();
+	}, [user]);
+
+	// Add record
 	const addRecord = async (record: FinancialRecord) => {
+		// Add record to database
 		const response = await fetch ("http://localhost:3001/financial-records", {
 			method: "POST",
 			body: JSON.stringify(record),
@@ -36,6 +62,7 @@ export const FinancialRecordsProvider = ({
 				"Content-Type": "application/json",
 			}
 		})
+		// If response is OK, add record to state
 		try {
 			if (response.ok) {
 				const newRecord = await response.json();
