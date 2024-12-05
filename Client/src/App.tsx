@@ -1,30 +1,33 @@
-import './App.css'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { Dashboard } from './pages/dashboard'
-import { Auth } from './pages/auth'
-import { FinancialRecordsProvider } from './contexts/financial-record-context'
+import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Dashboard } from "./pages/dashboard"; // Import Dashboard component
+import { Auth } from "./pages/auth"; // Import Auth component
+import { FinancialRecordsProvider } from "./contexts/financial-record-context"; // Import FinancialRecordsProvider component
+import ErrorBoundary from "./components/ErrorBoundary"; // Import ErrorBoundary component
 
 function App() {
-
   return (
     <Router>
       <div className="app-container">
-        <Routes>
-          {/* This is the default route */}
-          <Route
-          path="/"
-          element={
-            <FinancialRecordsProvider>
-            <Dashboard />
-            </FinancialRecordsProvider>
-          }
-          />
-          {/* This is the route for the authentication page */}
-          <Route path="/auth" element={<Auth />} />
-        </Routes>
+        {/* Wrap the Routes component with the ErrorBoundary component */}
+        <ErrorBoundary>
+          <Routes>
+            {/* Default route */}
+            <Route
+              path="/"
+              element={
+                <FinancialRecordsProvider>
+                  <Dashboard />
+                </FinancialRecordsProvider>
+              }
+            />
+            {/* Authentication page route */}
+            <Route path="/auth" element={<Auth />} />
+          </Routes>
+        </ErrorBoundary>
       </div>
     </Router>
-  )
+  );
 }
 
-export default App
+export default App;
