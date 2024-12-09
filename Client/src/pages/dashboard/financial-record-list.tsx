@@ -3,7 +3,7 @@ import {
   FinancialRecord,
   useFinancialRecords,
 } from "../../contexts/financial-record-context";
-import { useTable, Column, CellProps, Row } from "react-table";
+import { useTable } from "react-table";
 
 // Dropdown options for categories
 const categories = [
@@ -31,170 +31,185 @@ const paymentMethods = [
   "Other",
 ];
 
-// EditableCell component: Handles rendering and editing of table cells
+// EditableCell component
 const EditableCell = ({
-  value: initialValue, // The initial value of the cell
-  row, // The current row data
-  column, // The current column data
-  updateRecord, // Function to update the record
-  editable, // Boolean indicating if the cell is editable
-  editableOptions, // Optional array of dropdown options
-}) => {
-  const [isEditing, setIsEditing] = useState(false); // State to track if the cell is being edited
-  const [value, setValue] = useState(initialValue); // State for the current cell value
+                        value: initialValue,
+                        row,
+                        column,
+                        updateRecord,
+                        editable,
+                        editableOptions,
+                      }: any) => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [value, setValue] = useState(initialValue);
 
-  // Handles blur event: stops editing and updates the record
   const onBlur = () => {
     setIsEditing(false);
     updateRecord(row.index, column.id, value);
   };
 
   return (
-    // Render the cell as a clickable div when not editing
-    <div
-      onClick={() => editable && setIsEditing(true)}
-      style={{ cursor: editable ? "pointer" : "default" }}
-    >
-      {isEditing ? (
-        // If the cell is being edited, render an input or select element
-        editableOptions ? (
-          // Render a dropdown (select) if editableOptions are provided
-          <select
-            value={value}
-            onChange={(e) => setValue(e.target.value)} // Update the cell value on change
-            autoFocus
-            onBlur={onBlur}
-            style={{ width: "100%" }}
-          >
-            {/* Render dropdown options */}
-            {editableOptions.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
+      <div
+          onClick={() => editable && setIsEditing(true)}
+          className={`p-3 rounded-lg transition-all duration-300 ${
+              editable ? "cursor-pointer hover:bg-blue-100" : ""
+          }`}
+      >
+        {isEditing ? (
+            editableOptions ? (
+                <select
+                    value={value}
+                    onChange={(e) => setValue(e.target.value)}
+                    autoFocus
+                    onBlur={onBlur}
+                    className="w-full border border-gray-300 rounded-lg px-3 py-2 shadow focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  {editableOptions.map((option: string) => (
+                      <option key={option} value={option}>
+                        {option}
+                      </option>
+                  ))}
+                </select>
+            ) : (
+                <input
+                    value={value}
+                    onChange={(e) => setValue(e.target.value)}
+                    autoFocus
+                    onBlur={onBlur}
+                    className="w-full border border-gray-300 rounded-lg px-3 py-2 shadow focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+            )
         ) : (
-          // Render a text input for general editing
-          <input
-            value={value}
-            onChange={(e) => setValue(e.target.value)} // Update the cell value on change
-            autoFocus
-            onBlur={onBlur}
-            style={{ width: "100%" }}
-          />
-        )
-      ) : (
-        // If not editing, display the cell value
-        value.toString()
-      )}
-    </div>
+            <span className="text-gray-800 font-medium">{value.toString()}</span>
+        )}
+      </div>
   );
 };
 
-// FinancialRecordList component: Displays and manages the financial records table
+// FinancialRecordList component
 export const FinancialRecordList = () => {
-  const { records } = useFinancialRecords(); // Fetch financial records from the context
+  const { records } = useFinancialRecords();
 
-  // Display a loading message if no records are available
   if (!records || records.length === 0) {
-    return <div>Loading records...</div>;
+    return <div className="text-center text-gray-500 mt-10">Loading records...</div>;
   }
 
-  // Define table columns
   const columns = useMemo(
-    () => [
-      {
-        Header: "Description", // Column header
-        accessor: "description", // Field name in the record
-        Cell: (props) => (
-          <EditableCell {...props} updateRecord={() => null} editable={true} /> // Editable text cell
-        ),
-      },
-      {
-        Header: "Amount", // Column header
-        accessor: "amount", // Field name in the record
-        Cell: (props) => (
-          <EditableCell {...props} updateRecord={() => null} editable={true} /> // Editable text cell
-        ),
-      },
-      {
-        Header: "Category", // Column header
-        accessor: "category", // Field name in the record
-        Cell: (props) => (
-          <EditableCell
-            {...props}
-            updateRecord={() => null}
-            editable={true} // Editable dropdown cell
-            editableOptions={categories} // Pass category options
-          />
-        ),
-      },
-      {
-        Header: "Payment Method", // Column header
-        accessor: "paymentMethod", // Field name in the record
-        Cell: (props) => (
-          <EditableCell
-            {...props}
-            updateRecord={() => null} // Handle update event
-            editable={true} // Editable dropdown cell
-            editableOptions={paymentMethods} // Pass payment method options
-          />
-        ),
-      },
-      {
-        Header: "Date", // Column header
-        accessor: "date", // Field name in the record
-        Cell: (props) => (
-          <EditableCell {...props} updateRecord={() => null} editable={false} /> // Non-editable text cell
-        ),
-      },
-      {
-        Header: "Delete", // Column header
-        id: "delete", // Custom column ID
-        Cell: ({ row }) => (
-          // Render a delete button
-          <button onClick={() => null} className="button">
-            Delete
-          </button>
-        ),
-      },
-    ],
-    [],
+      () => [
+        {
+          Header: "Description",
+          accessor: "description",
+          Cell: (props: any) => (
+              <EditableCell {...props} updateRecord={() => null} editable={true} />
+          ),
+        },
+        {
+          Header: "Amount",
+          accessor: "amount",
+          Cell: (props: any) => (
+              <EditableCell {...props} updateRecord={() => null} editable={true} />
+          ),
+        },
+        {
+          Header: "Category",
+          accessor: "category",
+          Cell: (props: any) => (
+              <EditableCell
+                  {...props}
+                  updateRecord={() => null}
+                  editable={true}
+                  editableOptions={categories}
+              />
+          ),
+        },
+        {
+          Header: "Payment Method",
+          accessor: "paymentMethod",
+          Cell: (props: any) => (
+              <EditableCell
+                  {...props}
+                  updateRecord={() => null}
+                  editable={true}
+                  editableOptions={paymentMethods}
+              />
+          ),
+        },
+        {
+          Header: "Date",
+          accessor: "date",
+          Cell: (props: any) => (
+              <EditableCell {...props} updateRecord={() => null} editable={false} />
+          ),
+        },
+        {
+          Header: "Delete",
+          id: "delete",
+          Cell: ({ row }: any) => (
+              <button
+                  onClick={() => null}
+                  className="bg-gradient-to-r from-red-400 to-red-600 text-white px-4 py-2 rounded-lg shadow hover:scale-105 hover:shadow-xl transition transform"
+              >
+                Delete
+              </button>
+          ),
+        },
+      ],
+      []
   );
 
-  // Generate table instance using react-table
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({
-      columns, // Table columns
-      data: records, // Table data
-    });
+      useTable({
+        columns,
+        data: records,
+      });
 
-  // Render the table
   return (
-    <div className="table-container">
-      <table {...getTableProps()} className="table">
-        <thead>
+      <div className="overflow-x-auto p-6 bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl shadow-xl">
+        <h1 className="text-3xl font-extrabold text-gray-800 mb-6 text-center">
+          Financial Records
+        </h1>
+        <table
+            {...getTableProps()}
+            className="min-w-full table-auto bg-white rounded-lg border border-gray-200"
+        >
+          <thead>
           {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps()}>{column.render("Header")}</th> // Render column headers
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {rows.map((row) => {
-            prepareRow(row); // Prepare the row data
-            return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map((cell) => (
-                  <td {...cell.getCellProps()}>{cell.render("Cell")}</td> // Render cell content
+              <tr
+                  {...headerGroup.getHeaderGroupProps()}
+                  className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white"
+              >
+                {headerGroup.headers.map((column) => (
+                    <th
+                        {...column.getHeaderProps()}
+                        className="px-6 py-3 text-left text-lg font-semibold tracking-wide"
+                    >
+                      {column.render("Header")}
+                    </th>
                 ))}
               </tr>
+          ))}
+          </thead>
+          <tbody {...getTableBodyProps()} className="text-gray-800">
+          {rows.map((row) => {
+            prepareRow(row);
+            return (
+                <tr
+                    {...row.getRowProps()}
+                    className="hover:shadow-lg hover:bg-gray-50 transition transform"
+                >
+                  {row.cells.map((cell) => (
+                      <td
+                          {...cell.getCellProps()}
+                          className="px-6 py-4 border-b border-gray-200"
+                      >
+                        {cell.render("Cell")}
+                      </td>
+                  ))}
+                </tr>
             );
           })}
-        </tbody>
-      </table>
-    </div>
+          </tbody>
+        </table>
+      </div>
   );
 };
