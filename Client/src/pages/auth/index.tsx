@@ -1,14 +1,16 @@
-import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from '@clerk/clerk-react'
+import { SignedIn, SignedOut, SignInButton, SignUpButton } from '@clerk/clerk-react'
+import { Navigate } from 'react-router-dom'
 
 export const Auth = () => {
 	return (
 		<div className="sign-in-container">
 			<SignedIn> {/* This is a Clerk component that checks if the user is signed in */}
-				<UserButton />
+				<Navigate to='/Dashboard' /> {/* This is a React Router component that redirects the user to the dashboard */}
 			</SignedIn>
 			<SignedOut> {/* This is a Clerk component that checks if the user is signed out */}
-				<SignInButton mode='modal'/> {/* This is a Clerk component that creates a sign in button and the modal creates a pop-up instead of a redirect */}
-				<SignUpButton mode='modal'/> {/* This is a Clerk component that creates a sign up button and the modal creates a pop-up instead of a redirect */}
+				{/* This is a Clerk component that allows the user to sign in or sign up with a modal */}
+				<SignInButton mode='modal'/> 
+				<SignUpButton mode='modal'/>
 			</SignedOut> 
 		</div>
 	);
