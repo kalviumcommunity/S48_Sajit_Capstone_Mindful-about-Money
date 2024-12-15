@@ -26,6 +26,7 @@ import { useFinancialRecords } from "../../contexts/financial-record-context";
 
 export const Dashboard = () => {
   const { user } = useUser();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { records, addRecord } = useFinancialRecords();
   const [chartType, setChartType] = useState("income");
   const [isFormOpen, setIsFormOpen] = useState(false);
