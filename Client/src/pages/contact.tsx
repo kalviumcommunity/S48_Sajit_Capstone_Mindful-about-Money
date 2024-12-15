@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Twitter, Linkedin, Github, Mail, MapPin } from "lucide-react";
+import React from "react";
+import { Twitter, Linkedin, Github, Mail, MapPin, Phone } from "lucide-react";
 
 const ContactPage: React.FC = () => {
   const socialLinks = [
@@ -19,55 +19,6 @@ const ContactPage: React.FC = () => {
       icon: Github,
     },
   ];
-
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
-
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    setFormData({
-      ...formData,
-      [e.target.id]: e.target.value,
-    });
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    // Basic validation
-    if (!formData.name || !formData.email || !formData.message) {
-      setError("All fields are required!");
-      return;
-    }
-
-    setError("");
-    setSuccess("");
-
-    try {
-      // Placeholder for sending data to an API or service
-      const response = await fetch("/api/sendEmail", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        setSuccess("Message sent successfully!");
-        setFormData({ name: "", email: "", message: "" });
-      } else {
-        setError("Failed to send the message. Please try again.");
-      }
-    } catch (err) {
-      setError("An error occurred. Please try again later.");
-    }
-  };
 
   return (
     <div className="bg-gradient-to-br from-slate-50 via-white to-slate-100 min-h-screen overflow-x-hidden">
@@ -131,7 +82,7 @@ const ContactPage: React.FC = () => {
             <h3 className="text-2xl font-bold text-slate-800 mb-6 text-center">
               Send Me a Message
             </h3>
-            <form className="space-y-4" onSubmit={handleSubmit}>
+            <form className="space-y-4">
               <div>
                 <label htmlFor="name" className="block text-slate-700 mb-2">
                   Name
@@ -139,8 +90,6 @@ const ContactPage: React.FC = () => {
                 <input
                   type="text"
                   id="name"
-                  value={formData.name}
-                  onChange={handleChange}
                   className="w-full px-4 py-3 rounded-lg border border-emerald-100 focus:outline-none focus:ring-2 focus:ring-emerald-500"
                   placeholder="Your Name"
                 />
@@ -152,8 +101,6 @@ const ContactPage: React.FC = () => {
                 <input
                   type="email"
                   id="email"
-                  value={formData.email}
-                  onChange={handleChange}
                   className="w-full px-4 py-3 rounded-lg border border-emerald-100 focus:outline-none focus:ring-2 focus:ring-emerald-500"
                   placeholder="you@example.com"
                 />
@@ -164,15 +111,11 @@ const ContactPage: React.FC = () => {
                 </label>
                 <textarea
                   id="message"
-                  value={formData.message}
-                  onChange={handleChange}
                   rows={4}
                   className="w-full px-4 py-3 rounded-lg border border-emerald-100 focus:outline-none focus:ring-2 focus:ring-emerald-500"
                   placeholder="Your message here..."
                 ></textarea>
               </div>
-              {error && <p className="text-red-500 text-sm">{error}</p>}
-              {success && <p className="text-green-500 text-sm">{success}</p>}
               <button
                 type="submit"
                 className="w-full bg-emerald-600 text-white px-8 py-3 rounded-lg hover:bg-emerald-700 transition-colors"
