@@ -13,6 +13,7 @@ const AboutDeveloper: React.FC = () => {
   const [activeGallery, setActiveGallery] = useState<"bikes" | "friends">(
     "bikes",
   );
+  const [hoveredInterest, setHoveredInterest] = useState<number | null>(null);
 
   const interestSections = [
     {
@@ -42,126 +43,159 @@ const AboutDeveloper: React.FC = () => {
   ];
 
   const bikeImages = [
-    { src: "/api/placeholder/400/300", alt: "First Bike Adventure" },
-    { src: "/api/placeholder/400/300", alt: "Mountain Road Ride" },
-    { src: "/api/placeholder/400/300", alt: "Sunset Ride" },
+    {
+      src: "/src/assets/about developer/bike/bike1.png",
+      alt: "Old School Vintage Vibe",
+    },
+    {
+      src: "/src/assets/about developer/bike/bike2.png",
+      alt: "Bike Ride Home",
+    },
+    {
+      src: "/src/assets/about developer/bike/bike3.png",
+      alt: "Into the Wilderness",
+    },
   ];
 
   const friendsImages = [
-    { src: "/api/placeholder/400/300", alt: "College Hangout" },
-    { src: "/api/placeholder/400/300", alt: "Group Trip" },
-    { src: "/api/placeholder/400/300", alt: "Weekend Meetup" },
+    {
+      src: "/src/assets/about developer/frens/frens1.png",
+      alt: "Peak Heat Moment",
+    },
+    {
+      src: "/src/assets/about developer/frens/frens3.png",
+      alt: "Random Meetup",
+    },
+    {
+      src: "/src/assets/about developer/frens/frens2.png",
+      alt: "Failed Plan to Hike",
+    },
   ];
 
   return (
-    <div className="bg-gradient-to-br from-slate-50 via-white to-slate-100 min-h-screen overflow-x-hidden">
-      <div className="max-w-7xl mx-auto py-24 px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h1 className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 mb-6">
-            About Me
-          </h1>
-          <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-            Exploring life through technology, creativity, and passion
-          </p>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-16">
-          {/* Personal Introduction */}
-          <div className="bg-white/60 backdrop-blur-sm p-8 rounded-2xl shadow-xl border border-emerald-50">
-            <div className="text-center mb-6">
+    <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-50 via-white to-slate-100">
+      <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        <div className="bg-white/60 backdrop-blur-sm rounded-3xl overflow-hidden shadow-2xl">
+          {/* Profile Header */}
+          <div className="flex flex-col md:flex-row items-center p-8 bg-emerald-50/50">
+            <div className="w-64 h-64 mb-6 md:mb-0 md:mr-10 relative">
               <img
-                src="/api/placeholder/400/400"
+                src="/src/assets/about developer/developer.png"
                 alt="Sajit Profile"
-                className="w-64 h-64 object-cover rounded-full mx-auto mb-6 border-4 border-emerald-100 shadow-lg"
+                className="w-full h-full object-cover rounded-full border-4 border-emerald-100 shadow-lg transform hover:scale-105 transition-transform duration-300"
               />
-              <h2 className="text-3xl font-bold text-slate-800">Sajit</h2>
-              <p className="text-slate-600">Tech Enthusiast & Developer</p>
             </div>
-
-            <div className="space-y-4 text-slate-700">
-              <p>
+            <div className="text-center md:text-left">
+              <h1 className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 mb-4">
+                Sajit
+              </h1>
+              <h2 className="text-slate-600 mb-4">
+                Tech Enthusiast & Developer
+              </h2>
+              <p className="text-slate-700 max-w-md">
                 Hey there! I'm a 22-year-old computer science student based in
                 Bangalore, currently in my second year of college. When I'm not
                 coding or building digital solutions, you'll find me exploring
                 my passions.
               </p>
-              <div className="flex items-center space-x-3">
-                <Coffee className="text-emerald-600 h-6 w-6" />
-                <span>Chai lover and social enthusiast</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <Bike className="text-emerald-600 h-6 w-6" />
-                <span>Weekend bike rides and adventures</span>
+              <div className="flex justify-center md:justify-start space-x-4 mt-6">
+                <div className="flex items-center space-x-3">
+                  <Coffee className="text-emerald-600 h-6 w-6" />
+                  <span className="text-slate-700">Chai lover</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <Bike className="text-emerald-600 h-6 w-6" />
+                  <span className="text-slate-700">Weekend adventurer</span>
+                </div>
               </div>
             </div>
           </div>
 
           {/* Interests Section */}
-          <div className="bg-white/60 backdrop-blur-sm p-8 rounded-2xl shadow-xl border border-emerald-50">
-            <h3 className="text-2xl font-bold text-slate-800 mb-6 text-center">
+          <div className="p-8 bg-emerald-50/50">
+            <h3 className="text-2xl font-bold text-slate-800 text-center mb-8">
               My Interests
             </h3>
-            <div className="grid md:grid-cols-2 gap-4">
+            <div className="grid md:grid-cols-2 gap-6">
               {interestSections.map((interest, index) => (
                 <div
                   key={index}
-                  className="bg-emerald-50 p-4 rounded-xl text-center transform transition-all duration-300 hover:scale-105"
+                  className={`relative group overflow-hidden rounded-xl p-6 transition-all duration-300 ${
+                    hoveredInterest === index ? "bg-emerald-100" : "bg-white"
+                  }`}
+                  onMouseEnter={() => setHoveredInterest(index)}
+                  onMouseLeave={() => setHoveredInterest(null)}
                 >
-                  <div className="bg-white p-3 rounded-full inline-block mb-4">
-                    <interest.icon className="h-8 w-8 text-emerald-600" />
+                  <div className="relative z-10 text-center">
+                    <div
+                      className={`bg-white p-3 rounded-full inline-block mb-4 transform transition-transform ${
+                        hoveredInterest === index ? "scale-110" : ""
+                      }`}
+                    >
+                      <interest.icon
+                        className={`h-8 w-8 ${
+                          hoveredInterest === index
+                            ? "text-emerald-700"
+                            : "text-emerald-600"
+                        }`}
+                      />
+                    </div>
+                    <h4 className="font-bold text-slate-800 mb-2">
+                      {interest.title}
+                    </h4>
+                    <p className="text-slate-600 text-sm">
+                      {interest.description}
+                    </p>
                   </div>
-                  <h4 className="font-bold text-slate-800 mb-2">
-                    {interest.title}
-                  </h4>
-                  <p className="text-slate-600 text-sm">
-                    {interest.description}
-                  </p>
                 </div>
               ))}
             </div>
           </div>
-        </div>
 
-        {/* Photo Galleries */}
-        <div className="mt-16 bg-white/60 backdrop-blur-sm p-8 rounded-2xl shadow-xl border border-emerald-50">
-          <div className="flex justify-center space-x-4 mb-8">
-            <button
-              onClick={() => setActiveGallery("bikes")}
-              className={`px-6 py-2 rounded-lg transition-all ${
-                activeGallery === "bikes"
-                  ? "bg-emerald-600 text-white"
-                  : "bg-emerald-50 text-emerald-600 hover:bg-emerald-100"
-              }`}
-            >
-              My Bikes
-            </button>
-            <button
-              onClick={() => setActiveGallery("friends")}
-              className={`px-6 py-2 rounded-lg transition-all ${
-                activeGallery === "friends"
-                  ? "bg-emerald-600 text-white"
-                  : "bg-emerald-50 text-emerald-600 hover:bg-emerald-100"
-              }`}
-            >
-              Friends
-            </button>
-          </div>
+          {/* Gallery Section */}
+          <div className="p-8 bg-white/50">
+            <div className="flex justify-center space-x-4 mb-8">
+              <button
+                onClick={() => setActiveGallery("bikes")}
+                className={`px-6 py-2 rounded-lg transition-all ${
+                  activeGallery === "bikes"
+                    ? "bg-emerald-600 text-white"
+                    : "bg-emerald-50 text-emerald-600 hover:bg-emerald-100"
+                }`}
+              >
+                My Bikes
+              </button>
+              <button
+                onClick={() => setActiveGallery("friends")}
+                className={`px-6 py-2 rounded-lg transition-all ${
+                  activeGallery === "friends"
+                    ? "bg-emerald-600 text-white"
+                    : "bg-emerald-50 text-emerald-600 hover:bg-emerald-100"
+                }`}
+              >
+                Friends
+              </button>
+            </div>
 
-          <div className="grid md:grid-cols-3 gap-4">
-            {(activeGallery === "bikes" ? bikeImages : friendsImages).map(
-              (image, index) => (
-                <div
-                  key={index}
-                  className="overflow-hidden rounded-2xl transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
-                >
-                  <img
-                    src={image.src}
-                    alt={image.alt}
-                    className="w-full h-64 object-cover"
-                  />
-                </div>
-              ),
-            )}
+            <div className="grid md:grid-cols-3 gap-6">
+              {(activeGallery === "bikes" ? bikeImages : friendsImages).map(
+                (image, index) => (
+                  <div
+                    key={index}
+                    className="overflow-hidden rounded-2xl group relative"
+                  >
+                    <img
+                      src={image.src}
+                      alt={image.alt}
+                      className="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent to-emerald-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                      <p className="text-white text-sm">{image.alt}</p>
+                    </div>
+                  </div>
+                ),
+              )}
+            </div>
           </div>
         </div>
       </div>
