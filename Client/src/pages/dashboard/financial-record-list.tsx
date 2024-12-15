@@ -65,14 +65,14 @@ const EditableCell = ({
       onClick={() => editable && setIsEditing(true)}
     >
       {isEditing ? (
-        <div className="flex items-center">
+        <div className='flex items-center'>
           {editableOptions ? (
             <select
               value={value}
               onChange={(e) => setValue(e.target.value)}
               autoFocus
               onBlur={onBlur}
-              className="w-full border-2 border-indigo-300 rounded-lg px-3 py-2 shadow focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className='w-full border-2 border-indigo-300 rounded-lg px-3 py-2 shadow focus:outline-none focus:ring-2 focus:ring-indigo-500'
             >
               {editableOptions.map((option: string) => (
                 <option key={option} value={option}>
@@ -89,30 +89,30 @@ const EditableCell = ({
               className={`w-full border-2 border-indigo-300 rounded-lg px-3 py-2 shadow focus:outline-none focus:ring-2 focus:ring-indigo-500 ${additionalClass}`}
             />
           )}
-          <div className="flex ml-2">
+          <div className='flex ml-2'>
             <button
               onClick={onBlur}
-              className="text-green-600 hover:bg-green-100 p-1 rounded-full"
+              className='text-green-600 hover:bg-green-100 p-1 rounded-full'
             >
               <Save size={18} />
             </button>
             <button
               onClick={() => setIsEditing(false)}
-              className="text-red-600 hover:bg-red-100 p-1 rounded-full ml-1"
+              className='text-red-600 hover:bg-red-100 p-1 rounded-full ml-1'
             >
               <X size={18} />
             </button>
           </div>
         </div>
       ) : (
-        <div className="flex items-center">
+        <div className='flex items-center'>
           <span className={`font-semibold ${additionalClass}`}>
             {value.toString()}
           </span>
           {editable && (
             <Edit2
               size={16}
-              className="ml-2 text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              className='ml-2 text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300'
             />
           )}
         </div>
@@ -190,11 +190,11 @@ export const FinancialRecordList = () => {
           );
         },
         Header: ({ column }: any) => (
-          <div className="flex items-center">
+          <div className='flex items-center'>
             <span>Type</span>
-            <div className="flex items-center ml-2">
+            <div className='flex items-center ml-2'>
               <div
-                className="cursor-pointer"
+                className='cursor-pointer'
                 onClick={() => {
                   setSortColumn("type");
                   setSortDirection(sortDirection === "asc" ? "desc" : "asc");
@@ -209,7 +209,7 @@ export const FinancialRecordList = () => {
               </div>
               <Filter
                 size={16}
-                className="ml-1 cursor-pointer"
+                className='ml-1 cursor-pointer'
                 onClick={(e) => {
                   e.stopPropagation();
                   setFilterType(filterType === "Income" ? "Expense" : "Income");
@@ -298,10 +298,10 @@ export const FinancialRecordList = () => {
         Header: "Actions",
         id: "actions",
         Cell: ({ row }: any) => (
-          <div className="flex space-x-2">
+          <div className='flex space-x-2'>
             <button
               onClick={() => deleteRecord(row.original._id ?? "")}
-              className="text-red-500 hover:bg-red-100 p-2 rounded-full transition-colors"
+              className='text-red-500 hover:bg-red-100 p-2 rounded-full transition-colors'
             >
               <Trash2 size={18} />
             </button>
@@ -309,7 +309,7 @@ export const FinancialRecordList = () => {
         ),
       },
     ],
-    [records, filterType, sortColumn, sortDirection],
+    [records, filterType, sortColumn, sortDirection]
   );
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
@@ -320,42 +320,42 @@ export const FinancialRecordList = () => {
 
   if (!records || records.length === 0) {
     return (
-      <div className="text-center text-gray-500 mt-10">
+      <div className='text-center text-gray-500 mt-10'>
         No financial records found. Start tracking your finances!
       </div>
     );
   }
 
   return (
-    <div className="bg-white rounded-3xl shadow-2xl overflow-hidden">
-      <div className="px-6 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white flex justify-between items-center">
-        <h1 className="text-2xl font-bold">Financial Records</h1>
-        <div className="flex items-center space-x-2">
+    <div className='bg-white rounded-3xl shadow-2xl overflow-hidden'>
+      <div className='px-6 py-4 bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 text-white flex justify-between items-center'>
+        <h1 className='text-2xl font-bold'>Financial Records</h1>
+        <div className='flex items-center space-x-2'>
           {filterType && (
             <>
-              <span className="bg-white/20 px-3 py-1 rounded-full">
+              <span className='bg-white/20 px-3 py-1 rounded-full'>
                 {filterType} Only
               </span>
               <button
                 onClick={clearFilter}
-                className="bg-white/20 hover:bg-white/30 px-3 py-1 rounded-full flex items-center"
+                className='bg-white/20 hover:bg-white/30 px-3 py-1 rounded-full flex items-center'
               >
-                <X size={16} className="mr-1" /> Clear Filter
+                <X size={16} className='mr-1' /> Clear Filter
               </button>
             </>
           )}
         </div>
       </div>
 
-      <div className="overflow-x-auto">
-        <table {...getTableProps()} className="w-full">
-          <thead className="bg-gray-50">
+      <div className='overflow-x-auto'>
+        <table {...getTableProps()} className='w-full'>
+          <thead className='bg-emerald-50'>
             {headerGroups.map((headerGroup) => (
               <tr {...headerGroup.getHeaderGroupProps()}>
                 {headerGroup.headers.map((column) => (
                   <th
                     {...column.getHeaderProps()}
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    className='px-6 py-3 text-left text-xs font-medium text-emerald-600 uppercase tracking-wider'
                   >
                     {column.render("Header")}
                   </th>
@@ -363,18 +363,21 @@ export const FinancialRecordList = () => {
               </tr>
             ))}
           </thead>
-          <tbody {...getTableBodyProps()} className="divide-y divide-gray-200">
+          <tbody
+            {...getTableBodyProps()}
+            className='divide-y divide-emerald-200'
+          >
             {rows.map((row) => {
               prepareRow(row);
               return (
                 <tr
                   {...row.getRowProps()}
-                  className="hover:bg-gray-50 transition duration-200"
+                  className='hover:bg-emerald-50 transition duration-200'
                 >
                   {row.cells.map((cell) => (
                     <td
                       {...cell.getCellProps()}
-                      className="px-6 py-4 whitespace-nowrap"
+                      className='px-6 py-4 whitespace-nowrap'
                     >
                       {cell.render("Cell")}
                     </td>
