@@ -1,17 +1,17 @@
-import { SignedIn, SignedOut, SignInButton, SignUpButton } from '@clerk/clerk-react'
-import { Navigate } from 'react-router-dom'
+import { SignInButton, SignUpButton } from "@clerk/clerk-react";
 
 export const Auth = () => {
-	return (
-		<div className="sign-in-container">
-			<SignedIn> {/* This is a Clerk component that checks if the user is signed in */}
-				<Navigate to='/Dashboard' /> {/* This is a React Router component that redirects the user to the dashboard */}
-			</SignedIn>
-			<SignedOut> {/* This is a Clerk component that checks if the user is signed out */}
-				{/* This is a Clerk component that allows the user to sign in or sign up with a modal */}
-				<SignInButton mode='modal'/> 
-				<SignUpButton mode='modal'/>
-			</SignedOut> 
-		</div>
-	);
-}
+  return (
+    <div className='sign-in-container flex flex-col items-center justify-center space-y-4 p-8'>
+      <div className='text-center'>
+        <h2 className='text-2xl font-bold mb-4'>Welcome to Mindful Money</h2>
+        <p className='mb-6'>Please sign in or create an account to continue</p>
+
+        <div className='space-x-4'>
+          <SignInButton mode='modal' />
+          <SignUpButton mode='modal' />
+        </div>
+      </div>
+    </div>
+  );
+};
