@@ -36,8 +36,8 @@ export const Dashboard = () => {
     monthlyExpenses,
     netCashFlow,
     chartData,
-    incomeBreakdown,
-    expenseBreakdown,
+    // incomeBreakdown,
+    // expenseBreakdown,
   } = useMemo(() => {
     const now = new Date();
     const sixMonthsAgo = new Date(now.getFullYear(), now.getMonth() - 6, 1);

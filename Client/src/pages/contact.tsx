@@ -37,7 +37,7 @@ const ContactPage: React.FC = () => {
           <div className="bg-white/60 backdrop-blur-sm p-8 rounded-2xl shadow-xl border border-emerald-50">
             <div className="mb-8 text-center">
               <img
-                src="/api/placeholder/400/400"
+                src="/src/assets/about developer/developer.png"
                 alt="Sajit Profile"
                 className="w-64 h-64 object-cover rounded-full mx-auto mb-6 border-4 border-emerald-100 shadow-lg"
               />
@@ -58,7 +58,7 @@ const ContactPage: React.FC = () => {
 
               <div className="flex items-center space-x-4">
                 <MapPin className="text-emerald-600 h-6 w-6" />
-                <span className="text-slate-700">Remote / Worldwide</span>
+                <span className="text-slate-700">Remote / Bengaluru</span>
               </div>
 
               <div className="flex space-x-4 pt-4 justify-center">

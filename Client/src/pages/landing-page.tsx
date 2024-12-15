@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import { motion, useInView, useAnimation } from "framer-motion";
 import {
   SignInButton,
   SignUpButton,
@@ -9,69 +10,142 @@ import { Navigate } from "react-router-dom";
 import {
   WalletIcon,
   TrendUpIcon,
+  TrendingUp,
   ChartBarIcon,
   CreditCardIcon,
+  CheckIcon,
+  ArrowRightIcon,
+  ChevronRightIcon,
+  CheckCircleIcon,
+  TrendingUpIcon,
+  ShieldCheckIcon,
 } from "lucide-react";
-
-const FeatureCard = ({
-  icon: Icon,
-  title,
-  description,
-}: {
-  icon: React.ElementType;
-  title: string;
-  description: string;
-}) => (
-  <div className="bg-white/60 backdrop-blur-sm p-6 rounded-2xl space-y-4 transform transition-all duration-300 hover:scale-105 hover:shadow-xl border border-emerald-50">
-    <div className="bg-emerald-100 p-3 rounded-xl inline-block">
-      <Icon className="h-8 w-8 text-emerald-600" />
-    </div>
-    <h3 className="text-xl font-bold text-slate-800">{title}</h3>
-    <p className="text-slate-600">{description}</p>
-  </div>
-);
 
 const Landing: React.FC = () => {
   return (
     <div className="bg-gradient-to-br from-slate-50 via-white to-slate-100 min-h-screen overflow-x-hidden">
-      {/* Hero Section */}
-      <div className="relative max-w-7xl mx-auto py-24 px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
-          <h1 className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 mb-6">
-            Simple Finance Tracking
-          </h1>
-          <p className="text-xl text-slate-600 max-w-2xl mx-auto mb-10">
-            Effortlessly track your income, expenses, and financial health with
-            our user-friendly finance tracker.
-          </p>
+      {/* Enhanced Hero Section with Side-by-Side Layout */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+        className="relative max-w-7xl mx-auto py-24 px-4 sm:px-6 lg:px-8"
+      >
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+          {/* Left Content Section */}
+          <motion.div
+            initial={{ x: -100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.8, type: "spring", stiffness: 50 }}
+            className="space-y-8"
+          >
+            <div className="relative">
+              <h2 className="text-5xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 tracking-tight mb-6 leading-tight">
+                Unlock Your Financial Zen
+                <span className="absolute -top-4 -right-4 text-xl bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full">
+                  Beta
+                </span>
+              </h2>
+              <p className="text-xl text-slate-600 font-medium tracking-wide">
+                Empower mindful budgeting, effortless expense tracking, and
+                elevate financial literacy. Join a community pursuing conscious
+                money management.
+              </p>
+            </div>
 
-          {/* TODO: Replace with an actual hero illustration */}
-          {/* <img src="/hero-illustration.png" alt="Finance Tracking Dashboard" className="mx-auto max-w-2xl shadow-2xl rounded-2xl"/> */}
+            {/* Feature Highlights */}
+            <div className="grid grid-cols-2 gap-4">
+              {[
+                { icon: CheckCircleIcon, text: "Smart Tracking" },
+                { icon: TrendingUpIcon, text: "Growth Insights" },
+                { icon: ShieldCheckIcon, text: "Secure Platform" },
+                { icon: ChevronRightIcon, text: "Future-Ready" },
+              ].map((feature, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  whileHover={{ scale: 1.05 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5 }}
+                  className="flex items-center space-x-3 bg-white/60 backdrop-blur-sm p-3 rounded-xl shadow-sm hover:shadow-md transition-all"
+                >
+                  <feature.icon className="h-6 w-6 text-emerald-600" />
+                  <span className="text-sm text-slate-700">{feature.text}</span>
+                </motion.div>
+              ))}
+            </div>
 
-          <div className="flex justify-center space-x-4">
-            <SignInButton mode="modal">
-              <button className="bg-emerald-600 text-white px-8 py-3 rounded-lg hover:bg-emerald-700 transition-colors">
-                Sign In
-              </button>
-            </SignInButton>
-            <SignUpButton mode="modal">
-              <button className="border border-emerald-600 text-emerald-600 px-8 py-3 rounded-lg hover:bg-emerald-50 transition-colors">
-                Sign Up
-              </button>
-            </SignUpButton>
-          </div>
+            {/* Call to Action */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6, duration: 0.5 }}
+              className="flex items-center space-x-4"
+            >
+              <SignUpButton mode="modal">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-emerald-500/50"
+                >
+                  Join Now
+                </motion.button>
+              </SignUpButton>
+              <span className="text-slate-500">or</span>
+              <SignInButton mode="modal">
+                <button className="text-emerald-600 hover:text-emerald-800 font-medium underline-offset-4 hover:underline transition-colors">
+                  Sign In
+                </button>
+              </SignInButton>
+            </motion.div>
+          </motion.div>
+
+          {/* Right Illustration Section */}
+          <motion.div
+            initial={{ x: 100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.8, type: "spring", stiffness: 50 }}
+            className="relative group"
+          >
+            <div className="absolute -inset-2 bg-emerald-400/20 rounded-3xl -z-10 group-hover:scale-105 transition-transform duration-300 ease-out"></div>
+            <img
+              src="src/assets/hero-illustration.jpg"
+              alt="Mindful Money Illustration"
+              className="w-full transform transition-all duration-500 hover:scale-105 hover:rotate-2 perspective-1000 hover:shadow-2xl rounded-3xl"
+            />
+            <div className="absolute -bottom-8 -right-8 bg-white/80 backdrop-blur-sm p-4 rounded-xl shadow-lg">
+              <div className="flex items-center space-x-3">
+                <div className="bg-emerald-100 p-2 rounded-full">
+                  <CheckCircleIcon className="h-6 w-6 text-emerald-600" />
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-slate-800">
+                    100% Data Privacy
+                  </p>
+                  <p className="text-xs text-slate-500">Encrypted & Secure</p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
 
-      {/* Features Section */}
-      <div className="bg-white/50 backdrop-blur-xl py-24 px-4 sm:px-6 lg:px-8">
+      {/* Enhanced Features Section with 3D Card Effect */}
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        className="bg-white/10 backdrop-blur-xl py-24 px-4 sm:px-6 lg:px-8"
+      >
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 mb-4">
-              Key Features
+              Powerful Features
             </h2>
             <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-              Track your finances with ease and clarity
+              Unlock financial insights with our comprehensive tools
             </p>
           </div>
 
@@ -79,82 +153,186 @@ const Landing: React.FC = () => {
             {[
               {
                 icon: WalletIcon,
-                title: "Income & Expense Tracking",
+                title: "Smart Tracking",
                 description:
-                  "Easily log your daily income and expenses in seconds.",
+                  "Automated income and expense categorization with AI-powered insights.",
+                color: "bg-emerald-100",
+                textColor: "text-emerald-600",
               },
               {
                 icon: ChartBarIcon,
-                title: "Monthly Insights",
+                title: "Visual Analytics",
                 description:
-                  "Visualize your financial trends with intuitive monthly graphs.",
+                  "Interactive dashboards that transform complex data into clear visuals.",
+                color: "bg-purple-100",
+                textColor: "text-purple-600",
               },
               {
                 icon: CreditCardIcon,
-                title: "Net Financial Health",
+                title: "Financial Health",
                 description:
-                  "Track your net income and overall money flow at a glance.",
+                  "Comprehensive net worth and spending trend analysis.",
+                color: "bg-blue-100",
+                textColor: "text-blue-600",
               },
             ].map((feature, index) => (
-              <FeatureCard key={index} {...feature} />
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                whileHover={{ scale: 1.05 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="relative group"
+              >
+                <div className="absolute -inset-1 bg-emerald-400/20 rounded-3xl -z-10 group-hover:scale-105 transition-transform duration-300 ease-out"></div>
+                <div
+                  className={`bg-white/80 backdrop-blur-sm p-6 rounded-3xl space-y-4
+                  transform transition-all duration-300 border border-emerald-50
+                  hover:shadow-2xl relative overflow-hidden`}
+                >
+                  <div
+                    className={`${feature.color} ${feature.textColor} p-3 rounded-xl inline-block`}
+                  >
+                    <feature.icon className="h-8 w-8" />
+                  </div>
+                  <h3 className="text-xl font-bold text-slate-800">
+                    {feature.title}
+                  </h3>
+                  <p className="text-slate-600">{feature.description}</p>
+
+                  {/* Subtle animated line */}
+                  <div className="absolute bottom-0 left-0 w-full h-1 bg-emerald-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                </div>
+              </motion.div>
             ))}
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* How It Works Section */}
-      <div className="py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-        <div className="absolute inset-0 bg-emerald-50/30 -skew-y-6"></div>
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        className="py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
+      >
+        <div className="absolute inset-0 bg-emerald-50/30 -skew-y-6 z-0"></div>
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 mb-4">
               How It Works
             </h2>
             <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-              Simple steps to manage your finances
+              Simple steps to transform your financial management
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          {/* Steps Container */}
+          <div className="grid md:grid-cols-3 gap-8 mb-16">
             {[
               {
                 step: "1",
                 title: "Log Transactions",
                 description:
-                  "Input date, amount, category, and type of transaction.",
+                  "Effortlessly input your financial data with intuitive categorization.",
+                icon: WalletIcon,
               },
               {
                 step: "2",
-                title: "Visualize Data",
-                description: "View monthly graphs showing income and expenses.",
+                title: "Visualize Insights",
+                description:
+                  "Explore interactive graphs and comprehensive financial overviews.",
+                icon: ChartBarIcon,
               },
               {
                 step: "3",
                 title: "Track Progress",
-                description: "Monitor net income and financial flow easily.",
+                description:
+                  "Monitor your financial growth and make informed decisions.",
+                icon: TrendingUp,
               },
             ].map((item, index) => (
-              <div
+              <motion.div
                 key={index}
-                className="bg-white/60 backdrop-blur-sm p-6 rounded-2xl text-center space-y-4 transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.6,
+                  delay: index * 0.2,
+                }}
+                className="bg-white/70 backdrop-blur-sm p-6 rounded-2xl text-center space-y-4
+                  shadow-md hover:shadow-xl transition-all duration-300
+                  border border-emerald-50/50 hover:border-emerald-100"
               >
                 <div className="bg-emerald-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-2xl font-bold text-emerald-600">
-                    {item.step}
-                  </span>
+                  <item.icon className="w-8 h-8 text-emerald-600" />
                 </div>
                 <h3 className="text-xl font-bold text-slate-800">
                   {item.title}
                 </h3>
                 <p className="text-slate-600">{item.description}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
 
-          {/* TODO: Add an illustration showing the process */}
-          {/* <img src="/process-illustration.png" alt="Finance Tracking Process" className="mt-16 mx-auto max-w-4xl shadow-2xl rounded-2xl"/> */}
+          {/* Process Illustration with Integrated Layout */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7 }}
+            viewport={{ once: true }}
+            className="relative grid md:grid-cols-2 gap-8 items-center
+              bg-white/60 backdrop-blur-sm rounded-3xl p-8
+              shadow-xl border border-emerald-50/50
+              overflow-hidden group"
+          >
+            {/* Text Description */}
+            <div className="space-y-6 z-10">
+              <h3 className="text-3xl font-bold text-slate-800">
+                Comprehensive Financial Tracking
+              </h3>
+              <p className="text-slate-600 text-lg">
+                Our intuitive platform transforms complex financial data into
+                clear, actionable insights. From transaction logging to advanced
+                analytics, we simplify your financial journey.
+              </p>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <button
+                  className="bg-emerald-600 text-white px-6 py-3 rounded-full
+                  hover:bg-emerald-700 transition-colors shadow-lg"
+                >
+                  Start Your Financial Journey
+                </button>
+              </motion.div>
+            </div>
+
+            {/* Image with Enhanced Effects */}
+            <div className="relative">
+              <div
+                className="absolute -inset-4 bg-emerald-400/10 rounded-3xl
+                group-hover:scale-105 transition-transform duration-300 ease-out -z-10"
+              ></div>
+              <img
+                src="/src/assets/process-illustration-2.jpg"
+                alt="Finance Tracking Process"
+                className="rounded-2xl shadow-2xl
+                  transform transition-all duration-300
+                  group-hover:scale-105 group-hover:rotate-1
+                  perspective-1000"
+              />
+              <div className="absolute bottom-2 right-2 bg-white/70 px-2 py-1 rounded-md text-xs text-slate-600">
+                Image by Freepik
+              </div>
+            </div>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Footer */}
       <footer className="bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 text-white py-16 px-4 sm:px-6 lg:px-8">
