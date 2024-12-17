@@ -148,8 +148,15 @@ export const FinancialRecordList = () => {
         const valueA = a[sortColumn as keyof FinancialRecord];
         const valueB = b[sortColumn as keyof FinancialRecord];
 
-        if (valueA < valueB) return sortDirection === "asc" ? -1 : 1;
-        if (valueA > valueB) return sortDirection === "asc" ? 1 : -1;
+        if (valueA !== undefined && valueB !== undefined) {
+          if (valueA < valueB) {
+            return sortDirection === "asc" ? -1 : 1;
+          }
+          if (valueA > valueB) {
+            return sortDirection === "asc" ? 1 : -1;
+          }
+        }
+
         return 0;
       });
     }
@@ -157,160 +164,160 @@ export const FinancialRecordList = () => {
     return filteredRecords;
   }, [records, filterType, sortColumn, sortDirection]);
 
-  const columns = useMemo(
-    () => [
-      {
-        Header: "Description",
-        accessor: "description",
-        Cell: (props: any) => (
-          <EditableCell
-            {...props}
-            updateRecord={updateCellRecord}
-            editable={true}
-          />
-        ),
-      },
-      {
-        Header: "Type",
-        accessor: "type",
-        Cell: (props: any) => {
-          const { value } = props;
-          return (
-            <EditableCell
-              {...props}
-              updateRecord={updateCellRecord}
-              editable={true}
-              editableOptions={types}
-              additionalClass={
-                value === "Income"
-                  ? "text-green-600 font-bold"
-                  : "text-red-600 font-bold"
-              }
-            />
-          );
-        },
-        Header: ({ column }: any) => (
-          <div className='flex items-center'>
-            <span>Type</span>
-            <div className='flex items-center ml-2'>
-              <div
-                className='cursor-pointer'
-                onClick={() => {
-                  setSortColumn("type");
-                  setSortDirection(sortDirection === "asc" ? "desc" : "asc");
-                }}
-              >
-                {sortColumn === "type" &&
-                  (sortDirection === "asc" ? (
-                    <ChevronUp size={16} />
-                  ) : (
-                    <ChevronDown size={16} />
-                  ))}
-              </div>
-              <Filter
-                size={16}
-                className='ml-1 cursor-pointer'
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setFilterType(filterType === "Income" ? "Expense" : "Income");
-                }}
-              />
-            </div>
-          </div>
-        ),
-      },
-      {
-        Header: "Amount",
-        accessor: "amount",
-        Cell: ({ row, value }: any) => {
-          const type = row.original.type;
-          const formattedValue =
-            type === "Income"
-              ? `+${Number(value).toLocaleString("en-US", {
-                  minimumFractionDigits: 2,
-                  maximumFractionDigits: 2,
-                })}`
-              : `-${Number(value).toLocaleString("en-US", {
-                  minimumFractionDigits: 2,
-                  maximumFractionDigits: 2,
-                })}`;
-
-          return (
-            <EditableCell
-              value={formattedValue}
-              row={row}
-              column={{ id: "amount" }}
-              updateRecord={updateCellRecord}
-              editable={true}
-              additionalClass={
-                type === "Income"
-                  ? "text-green-600 font-bold"
-                  : "text-red-600 font-bold"
-              }
-            />
-          );
-        },
-      },
-      {
-        Header: "Category",
-        accessor: "category",
-        Cell: (props: any) => (
-          <EditableCell
-            {...props}
-            updateRecord={updateCellRecord}
-            editable={true}
-            editableOptions={categories}
-          />
-        ),
-      },
-      {
-        Header: "Payment Method",
-        accessor: "paymentMethod",
-        Cell: (props: any) => (
-          <EditableCell
-            {...props}
-            updateRecord={updateCellRecord}
-            editable={true}
-            editableOptions={paymentMethods}
-          />
-        ),
-      },
-      {
-        Header: "Date",
-        accessor: "date",
-        Cell: ({ value }: any) => {
-          const formattedDate = new Date(value).toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "short",
-            day: "numeric",
-          });
-
-          return (
-            <EditableCell
-              value={formattedDate}
-              updateRecord={updateCellRecord}
-              editable={false}
-            />
-          );
-        },
-      },
-      {
-        Header: "Actions",
-        id: "actions",
-        Cell: ({ row }: any) => (
-          <div className='flex space-x-2'>
-            <button
-              onClick={() => deleteRecord(row.original._id ?? "")}
-              className='text-red-500 hover:bg-red-100 p-2 rounded-full transition-colors'
+const columns = useMemo(
+  () => [
+    {
+      Header: "Description",
+      accessor: "description",
+      Cell: (props: any) => (
+        <EditableCell
+          {...props}
+          updateRecord={updateCellRecord}
+          editable={true}
+        />
+      ),
+    },
+    {
+      accessor: "type",
+      Header: () => (
+        <div className='flex items-center'>
+          <span>Type</span>
+          <div className='flex items-center ml-2'>
+            <div
+              className='cursor-pointer'
+              onClick={() => {
+                setSortColumn("type");
+                setSortDirection(sortDirection === "asc" ? "desc" : "asc");
+              }}
             >
-              <Trash2 size={18} />
-            </button>
+              {sortColumn === "type" &&
+                (sortDirection === "asc" ? (
+                  <ChevronUp size={16} />
+                ) : (
+                  <ChevronDown size={16} />
+                ))}
+            </div>
+            <Filter
+              size={16}
+              className='ml-1 cursor-pointer'
+              onClick={(e) => {
+                e.stopPropagation();
+                setFilterType(filterType === "Income" ? "Expense" : "Income");
+              }}
+            />
           </div>
-        ),
+        </div>
+      ),
+      Cell: (props: any) => {
+        const { value } = props;
+        return (
+          <EditableCell
+            {...props}
+            updateRecord={updateCellRecord}
+            editable={true}
+            editableOptions={types}
+            additionalClass={
+              value === "Income"
+                ? "text-green-600 font-bold"
+                : "text-red-600 font-bold"
+            }
+          />
+        );
       },
-    ],
-    [records, filterType, sortColumn, sortDirection]
-  );
+    },
+    {
+      Header: "Amount",
+      accessor: "amount",
+      Cell: ({ row, value }: any) => {
+        const type = row.original.type;
+        const formattedValue =
+          type === "Income"
+            ? `+${Number(value).toLocaleString("en-US", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}`
+            : `-${Number(value).toLocaleString("en-US", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}`;
+
+        return (
+          <EditableCell
+            value={formattedValue}
+            row={row}
+            column={{ id: "amount" }}
+            updateRecord={updateCellRecord}
+            editable={true}
+            additionalClass={
+              type === "Income"
+                ? "text-green-600 font-bold"
+                : "text-red-600 font-bold"
+            }
+          />
+        );
+      },
+    },
+    {
+      Header: "Category",
+      accessor: "category",
+      Cell: (props: any) => (
+        <EditableCell
+          {...props}
+          updateRecord={updateCellRecord}
+          editable={true}
+          editableOptions={categories}
+        />
+      ),
+    },
+    {
+      Header: "Payment Method",
+      accessor: "paymentMethod",
+      Cell: (props: any) => (
+        <EditableCell
+          {...props}
+          updateRecord={updateCellRecord}
+          editable={true}
+          editableOptions={paymentMethods}
+        />
+      ),
+    },
+    {
+      Header: "Date",
+      accessor: "date",
+      Cell: ({ value }: any) => {
+        const formattedDate = new Date(value).toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+        });
+
+        return (
+          <EditableCell
+            value={formattedDate}
+            updateRecord={updateCellRecord}
+            editable={false}
+          />
+        );
+      },
+    },
+    {
+      Header: "Actions",
+      id: "actions",
+      Cell: ({ row }: any) => (
+        <div className='flex space-x-2'>
+          <button
+            onClick={() => deleteRecord(row.original._id ?? "")}
+            className='text-red-500 hover:bg-red-100 p-2 rounded-full transition-colors'
+          >
+            <Trash2 size={18} />
+          </button>
+        </div>
+      ),
+    },
+  ],
+  [records, filterType, sortColumn, sortDirection]
+);
+
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({

@@ -59,6 +59,8 @@ const handleSubmit = async (e: React.FormEvent) => {
       formData
     );
 
+    console.log(response.data);
+
     setSubmissionStatus("success");
     // Reset form
     setFormData({

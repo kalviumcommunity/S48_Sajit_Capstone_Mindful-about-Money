@@ -108,7 +108,7 @@ const AboutDeveloper: React.FC = () => {
               <div className='flex justify-center md:justify-start space-x-4 mt-6'>
                 <div className='flex items-center space-x-3'>
                   <Coffee className='text-emerald-600 h-6 w-6' />
-                  <span className='text-slate-700'>Chai lover</span>
+                  <span className='text-slate-700'>Chai runs in the blood</span>
                 </div>
                 <div className='flex items-center space-x-3'>
                   <Bike className='text-emerald-600 h-6 w-6' />
