@@ -6,7 +6,6 @@ import {
   Link,
   Navigate,
   useLocation,
-  useNavigate,
 } from "react-router-dom";
 import { Dashboard } from "./pages/dashboard";
 import { Auth } from "./pages/auth";
