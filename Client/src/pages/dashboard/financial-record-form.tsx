@@ -33,7 +33,7 @@ export const FinancialRecordForm = () => {
       amount: parseFloat(amount),
       category: category.trim(),
       paymentMethod: paymentMethod.trim(),
-      type: type,
+      type: type as "Income" | "Expense",
     };
 
     // Add the record using the context method
