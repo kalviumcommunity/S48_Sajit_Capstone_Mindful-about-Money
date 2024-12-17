@@ -1,5 +1,5 @@
 import React from "react";
-import { Twitter, Linkedin, Github, Mail, MapPin, Phone } from "lucide-react";
+import { Twitter, Linkedin, Github, Mail, MapPin } from "lucide-react";
 
 const ContactPage: React.FC = () => {
   const socialLinks = [
