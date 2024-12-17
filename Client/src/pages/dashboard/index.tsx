@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useUser } from "@clerk/clerk-react";
 import {
   LineChart,
@@ -27,7 +27,7 @@ import { useFinancialRecords } from "../../contexts/financial-record-context";
 export const Dashboard = () => {
   const { user } = useUser();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { records, addRecord } = useFinancialRecords();
+  const { records } = useFinancialRecords();
   const [chartType, setChartType] = useState("income");
   const [isFormOpen, setIsFormOpen] = useState(false);
 
@@ -43,8 +43,15 @@ export const Dashboard = () => {
     const now = new Date();
     const sixMonthsAgo = new Date(now.getFullYear(), now.getMonth() - 6, 1);
 
-    // Group records by month
-    const monthlyData = {};
+    interface MonthlyData {
+      month: string;
+      income: number;
+      expenses: number;
+    }
+    
+    // Explicit type for monthlyData
+    const monthlyData: { [key: string]: MonthlyData } = {};
+
     records
       .filter((record) => new Date(record.date) >= sixMonthsAgo)
       .forEach((record) => {
@@ -89,17 +96,16 @@ export const Dashboard = () => {
     );
     const netCashFlow = monthlyIncome - monthlyExpenses;
 
-    // Income and Expense Breakdowns
     const incomeBreakdown = records
       .filter((r) => r.type === "Income")
-      .reduce((acc, record) => {
+      .reduce<{ [key: string]: number }>((acc, record) => {
         acc[record.category] = (acc[record.category] || 0) + record.amount;
         return acc;
       }, {});
 
     const expenseBreakdown = records
       .filter((r) => r.type === "Expense")
-      .reduce((acc, record) => {
+      .reduce<{ [key: string]: number }>((acc, record) => {
         acc[record.category] = (acc[record.category] || 0) + record.amount;
         return acc;
       }, {});
