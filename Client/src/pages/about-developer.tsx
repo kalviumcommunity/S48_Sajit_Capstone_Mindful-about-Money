@@ -36,45 +36,45 @@ const AboutDeveloper: React.FC = () => {
 
   const bikeImages = [
     {
-      src: "/src/assets/about developer/bike/bike1.png",
+      src: "/assets/about developer/bike/bike1.png",
       alt: "Old School Vintage Vibe",
     },
     {
-      src: "/src/assets/about developer/bike/bike2.png",
+      src: "/assets/about developer/bike/bike2.png",
       alt: "Bike Ride Home",
     },
     {
-      src: "/src/assets/about developer/bike/bike3.png",
+      src: "/assets/about developer/bike/bike3.png",
       alt: "Into the Wilderness",
     },
   ];
 
   const friendsImages = [
     {
-      src: "/src/assets/about developer/frens/frens1.png",
+      src: "/assets/about developer/frens/frens1.png",
       alt: "Peak Heat Moment",
     },
     {
-      src: "/src/assets/about developer/frens/frens3.png",
+      src: "/assets/about developer/frens/frens3.png",
       alt: "Random Meetup",
     },
     {
-      src: "/src/assets/about developer/frens/frens2.png",
+      src: "/assets/about developer/frens/frens2.png",
       alt: "Failed Plan to Hike",
     },
   ];
 
   const doggos = [
     {
-      src: "/src/assets/about developer/doggos/chainz.png",
+      src: "/assets/about developer/doggos/chainz.png",
       alt: "Chainz",
     },
     {
-      src: "/src/assets/about developer/doggos/dusty.png",
+      src: "/assets/about developer/doggos/dusty.png",
       alt: "Dusty",
     },
     {
-      src: "/src/assets/about developer/doggos/campus-pups.png",
+      src: "/assets/about developer/doggos/campus-pups.png",
       alt: "Pups of RVU",
     },
   ];
@@ -87,7 +87,7 @@ const AboutDeveloper: React.FC = () => {
           <div className='flex flex-col md:flex-row items-center p-8 bg-emerald-50/50'>
             <div className='w-64 h-64 mb-6 md:mb-0 md:mr-10 relative'>
               <img
-                src='/src/assets/about developer/developer.png'
+                src='/assets/about-developer/developer.png'
                 alt='Sajit Profile'
                 className='w-full h-full object-cover rounded-full border-4 border-emerald-100 shadow-lg transform hover:scale-105 transition-transform duration-300'
               />
