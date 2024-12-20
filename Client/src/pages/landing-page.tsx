@@ -285,9 +285,9 @@ const Landing: React.FC = () => {
             transition={{ duration: 0.7 }}
             viewport={{ once: true }}
             className='relative grid md:grid-cols-2 gap-8 items-center
-              bg-white/60 backdrop-blur-sm rounded-3xl p-8
-              shadow-xl border border-emerald-50/50
-              overflow-hidden group'
+    bg-white/60 backdrop-blur-sm rounded-3xl p-8
+    shadow-xl border border-emerald-50/50
+    overflow-hidden'
           >
             {/* Text Description */}
             <div className='space-y-6 z-10'>
@@ -303,31 +303,31 @@ const Landing: React.FC = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <button
-                  className='bg-emerald-600 text-white px-6 py-3 rounded-full
-                  hover:bg-emerald-700 transition-colors shadow-lg'
-                >
-                  Start Your Financial Journey
-                </button>
+                <SignUpButton mode='modal'>
+                  <button
+                    className='bg-emerald-600 text-white px-6 py-3 rounded-full
+          hover:bg-emerald-700 transition-colors shadow-lg'
+                  >
+                    Start Your Financial Journey
+                  </button>
+                </SignUpButton>
               </motion.div>
             </div>
 
             {/* Image with Enhanced Effects */}
             <div className='relative'>
-              <div
-                className='absolute -inset-4 bg-emerald-400/10 rounded-3xl
-                group-hover:scale-105 transition-transform duration-300 ease-out -z-10'
-              ></div>
-              <img
-                src='/assets/process-illustration-2.jpg'
-                alt='Finance Tracking Process'
-                className='rounded-2xl shadow-2xl
-                  transform transition-all duration-300
-                  group-hover:scale-105 group-hover:rotate-1
-                  perspective-1000'
-              />
-              <div className='absolute bottom-2 right-2 bg-white/70 px-2 py-1 rounded-md text-xs text-slate-600'>
-                Image by Freepik
+              <div className='absolute -inset-4 bg-emerald-400/10 rounded-3xl -z-10'></div>
+              <div className='group'>
+                <img
+                  src='/assets/process-illustration-2.jpg'
+                  alt='Finance Tracking Process'
+                  className='rounded-2xl shadow-2xl
+          transform transition-all duration-300
+          group-hover:scale-105 group-hover:rotate-1'
+                />
+                <div className='absolute bottom-2 right-2 bg-white/70 px-2 py-1 rounded-md text-xs text-slate-600'>
+                  Image by Freepik
+                </div>
               </div>
             </div>
           </motion.div>
