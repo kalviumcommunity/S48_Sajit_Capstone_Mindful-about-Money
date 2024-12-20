@@ -109,7 +109,7 @@ const handleSubmit = async (e: React.FormEvent) => {
           <div className='bg-white/60 backdrop-blur-sm p-8 rounded-2xl shadow-xl border border-emerald-50'>
             <div className='mb-8 text-center'>
               <img
-                src='/assets/about-developer/developer2.png'
+                src='/assets/about-developer/developer2.webp'
                 alt='Sajit Profile'
                 className='w-64 h-64 object-cover rounded-full mx-auto mb-6 border-4 border-emerald-100 shadow-lg'
               />

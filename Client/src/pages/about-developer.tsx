@@ -36,45 +36,45 @@ const AboutDeveloper: React.FC = () => {
 
   const bikeImages = [
     {
-      src: "/assets/about-developer/bike/bike1.png",
+      src: "/assets/about-developer/bike/bike1.webp",
       alt: "Old School Vintage Vibe",
     },
     {
-      src: "/assets/about-developer/bike/bike2.png",
+      src: "/assets/about-developer/bike/bike2.webp",
       alt: "Bike Ride Home",
     },
     {
-      src: "/assets/about-developer/bike/bike3.png",
+      src: "/assets/about-developer/bike/bike3.webp",
       alt: "Into the Wilderness",
     },
   ];
 
   const friendsImages = [
     {
-      src: "/assets/about-developer/frens/frens1.png",
+      src: "/assets/about-developer/frens/frens1.webp",
       alt: "Peak Heat Moment",
     },
     {
-      src: "/assets/about-developer/frens/frens3.png",
+      src: "/assets/about-developer/frens/frens3.webp",
       alt: "Random Meetup",
     },
     {
-      src: "/assets/about-developer/frens/frens2.png",
+      src: "/assets/about-developer/frens/frens2.webp",
       alt: "Failed Plan to Hike",
     },
   ];
 
   const doggos = [
     {
-      src: "/assets/about-developer/doggos/chainz.png",
+      src: "/assets/about-developer/doggos/chainz.webp",
       alt: "Chainz",
     },
     {
-      src: "/assets/about-developer/doggos/dusty.png",
+      src: "/assets/about-developer/doggos/dusty.webp",
       alt: "Dusty",
     },
     {
-      src: "/assets/about-developer/doggos/campus-pups.png",
+      src: "/assets/about-developer/doggos/campus-pups-2.webp",
       alt: "Pups of RVU",
     },
   ];

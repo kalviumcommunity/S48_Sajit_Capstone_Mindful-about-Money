@@ -107,7 +107,7 @@ const Landing: React.FC = () => {
           >
             <div className='absolute -inset-2 bg-emerald-400/20 rounded-3xl -z-10 group-hover:scale-105 transition-transform duration-300 ease-out'></div>
             <img
-              src='/assets/hero-illustration.jpg'
+              src='/assets/hero-illustration.webp'
               alt='Mindful Money Illustration'
               className='w-full transform transition-all duration-500 hover:scale-105 hover:rotate-2 perspective-1000 hover:shadow-2xl rounded-3xl'
             />
@@ -319,7 +319,7 @@ const Landing: React.FC = () => {
               <div className='absolute -inset-4 bg-emerald-400/10 rounded-3xl -z-10'></div>
               <div className='group'>
                 <img
-                  src='/assets/process-illustration-2.jpg'
+                  src='/assets/process-illustration-2.webp'
                   alt='Finance Tracking Process'
                   className='rounded-2xl shadow-2xl
           transform transition-all duration-300
