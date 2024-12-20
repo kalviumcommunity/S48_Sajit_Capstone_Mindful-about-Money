@@ -346,16 +346,30 @@ const Landing: React.FC = () => {
           <div>
             <h4 className='font-semibold mb-4'>Quick Links</h4>
             <ul className='space-y-2'>
-              {["Dashboard", "About", "Contact"].map((link) => (
-                <li key={link}>
-                  <a
-                    href={`/${link.toLowerCase()}`}
-                    className='hover:text-emerald-100 transition-colors'
-                  >
-                    {link}
-                  </a>
-                </li>
-              ))}
+              <li>
+                <a
+                  href='#'
+                  className='hover:text-emerald-100 transition-colors'
+                >
+                  About
+                </a>
+              </li>
+              <li>
+                <a
+                  href='/contact'
+                  className='hover:text-emerald-100 transition-colors'
+                >
+                  Contact
+                </a>
+              </li>
+              <li>
+                <a
+                  href='/about-developer'
+                  className='hover:text-emerald-100 transition-colors'
+                >
+                  About The Developer
+                </a>
+              </li>
             </ul>
           </div>
           <div>
@@ -434,13 +448,13 @@ const Landing: React.FC = () => {
 
 const Auth: React.FC = () => {
   return (
-    <div className="sign-in-container">
+    <div className='sign-in-container'>
       <SignedIn>
-        <Navigate to="/Dashboard" />
+        <Navigate to='/Dashboard' />
       </SignedIn>
       <SignedOut>
-        <SignInButton mode="modal" />
-        <SignUpButton mode="modal" />
+        <SignInButton mode='modal' />
+        <SignUpButton mode='modal' />
       </SignedOut>
     </div>
   );
