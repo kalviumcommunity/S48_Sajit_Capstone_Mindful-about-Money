@@ -40,11 +40,11 @@ const AboutDeveloper: React.FC = () => {
       alt: "Old School Vintage Vibe",
     },
     {
-      src: "/assets/about-developer/bike/bike2.webp",
+      src: "/assets/about-developer/bike/bike3.webp",
       alt: "Bike Ride Home",
     },
     {
-      src: "/assets/about-developer/bike/bike3.webp",
+      src: "/assets/about-developer/bike/bike2.webp",
       alt: "Into the Wilderness",
     },
   ];
