@@ -107,7 +107,7 @@ const Landing: React.FC = () => {
           >
             <div className='absolute -inset-2 bg-emerald-400/20 rounded-3xl -z-10 group-hover:scale-105 transition-transform duration-300 ease-out'></div>
             <img
-              src='/assets/hero-illustration.jpg'
+              src='/assets/hero-illustration.webp'
               alt='Mindful Money Illustration'
               className='w-full transform transition-all duration-500 hover:scale-105 hover:rotate-2 perspective-1000 hover:shadow-2xl rounded-3xl'
             />
@@ -285,9 +285,9 @@ const Landing: React.FC = () => {
             transition={{ duration: 0.7 }}
             viewport={{ once: true }}
             className='relative grid md:grid-cols-2 gap-8 items-center
-              bg-white/60 backdrop-blur-sm rounded-3xl p-8
-              shadow-xl border border-emerald-50/50
-              overflow-hidden group'
+    bg-white/60 backdrop-blur-sm rounded-3xl p-8
+    shadow-xl border border-emerald-50/50
+    overflow-hidden'
           >
             {/* Text Description */}
             <div className='space-y-6 z-10'>
@@ -303,31 +303,31 @@ const Landing: React.FC = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <button
-                  className='bg-emerald-600 text-white px-6 py-3 rounded-full
-                  hover:bg-emerald-700 transition-colors shadow-lg'
-                >
-                  Start Your Financial Journey
-                </button>
+                <SignUpButton mode='modal'>
+                  <button
+                    className='bg-emerald-600 text-white px-6 py-3 rounded-full
+          hover:bg-emerald-700 transition-colors shadow-lg'
+                  >
+                    Start Your Financial Journey
+                  </button>
+                </SignUpButton>
               </motion.div>
             </div>
 
             {/* Image with Enhanced Effects */}
             <div className='relative'>
-              <div
-                className='absolute -inset-4 bg-emerald-400/10 rounded-3xl
-                group-hover:scale-105 transition-transform duration-300 ease-out -z-10'
-              ></div>
-              <img
-                src='/assets/process-illustration-2.jpg'
-                alt='Finance Tracking Process'
-                className='rounded-2xl shadow-2xl
-                  transform transition-all duration-300
-                  group-hover:scale-105 group-hover:rotate-1
-                  perspective-1000'
-              />
-              <div className='absolute bottom-2 right-2 bg-white/70 px-2 py-1 rounded-md text-xs text-slate-600'>
-                Image by Freepik
+              <div className='absolute -inset-4 bg-emerald-400/10 rounded-3xl -z-10'></div>
+              <div className='group'>
+                <img
+                  src='/assets/process-illustration-2.webp'
+                  alt='Finance Tracking Process'
+                  className='rounded-2xl shadow-2xl
+          transform transition-all duration-300
+          group-hover:scale-105 group-hover:rotate-1'
+                />
+                <div className='absolute bottom-2 right-2 bg-white/70 px-2 py-1 rounded-md text-xs text-slate-600'>
+                  Image by Freepik
+                </div>
               </div>
             </div>
           </motion.div>
@@ -346,16 +346,30 @@ const Landing: React.FC = () => {
           <div>
             <h4 className='font-semibold mb-4'>Quick Links</h4>
             <ul className='space-y-2'>
-              {["Dashboard", "About", "Contact"].map((link) => (
-                <li key={link}>
-                  <a
-                    href={`/${link.toLowerCase()}`}
-                    className='hover:text-emerald-100 transition-colors'
-                  >
-                    {link}
-                  </a>
-                </li>
-              ))}
+              <li>
+                <a
+                  href='#'
+                  className='hover:text-emerald-100 transition-colors'
+                >
+                  About
+                </a>
+              </li>
+              <li>
+                <a
+                  href='/contact'
+                  className='hover:text-emerald-100 transition-colors'
+                >
+                  Contact
+                </a>
+              </li>
+              <li>
+                <a
+                  href='/about-developer'
+                  className='hover:text-emerald-100 transition-colors'
+                >
+                  About The Developer
+                </a>
+              </li>
             </ul>
           </div>
           <div>
@@ -434,13 +448,13 @@ const Landing: React.FC = () => {
 
 const Auth: React.FC = () => {
   return (
-    <div className="sign-in-container">
+    <div className='sign-in-container'>
       <SignedIn>
-        <Navigate to="/Dashboard" />
+        <Navigate to='/Dashboard' />
       </SignedIn>
       <SignedOut>
-        <SignInButton mode="modal" />
-        <SignUpButton mode="modal" />
+        <SignInButton mode='modal' />
+        <SignUpButton mode='modal' />
       </SignedOut>
     </div>
   );
